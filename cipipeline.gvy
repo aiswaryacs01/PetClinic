@@ -67,6 +67,7 @@ pipeline {
         }
     stage('Deploy-App-QA') {
   	   steps {
+              sh script: export ANSIBLE_HOST_KEY_CHECKING=FALSE     
               sh 'ansible-playbook --inventory /tmp/inv $WORKSPACE/deploy/deploy-kube.yml --extra-vars "env=QA build=$BUILD_NUMBER"'
 	   }
 	   post { 
